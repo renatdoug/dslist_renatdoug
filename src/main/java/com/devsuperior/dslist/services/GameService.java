@@ -1,0 +1,26 @@
+package com.devsuperior.dslist.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.devsuperior.dslist.dto.GameMinDTO;
+import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.repositories.GameRepository;
+
+
+// Para registar essa classe como componente, usade Anotation @Component ou @Service
+@Component
+public class GameService {
+
+	@Autowired  //anotation para injetar um componente no outro;
+	private GameRepository gameRepository;
+	
+	public List<GameMinDTO> findAll(){
+		List<Game> result = gameRepository.findAll();
+		List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
+		return dto;
+	}
+	
+}
